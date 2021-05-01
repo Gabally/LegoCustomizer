@@ -1,0 +1,83 @@
+*
+{
+    border: 0;
+    outline: 0;
+}
+
+body
+{
+    font-size: 16;
+    background: rgba(33,33,33,1);
+    font-weight: bold;
+}
+
+#form
+{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue' ,'Arial' ,sans-serif;
+    color: #FEFFFF;
+    padding: 20px; 
+}
+
+.campo
+{
+    margin-top: 3%;
+}
+
+#notetesto
+{
+    resize: none;
+    width: 60%;
+}
+#date-error
+{
+    color: rgb(245, 8, 8);
+    padding: 5px;
+    font-weight: bold;
+    font-size: 11pt;
+    display: inline-block;
+}
+
+#submitBtn
+{
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: rgb(28, 170, 28);
+}
+
+#submitBtn:hover
+{
+  transform: translateY(-1px);
+  background-color: rgb(27, 139, 27);
+}
+
+#submitBtn:active
+{
+  transform: translateY(2px);
+  background-color: rgb(14, 122, 14);
+}
+
+.txtField
+{
+    margin: 20px;
+    font-size: 13pt;
+    color: white;
+    background-color: transparent;
+    border-bottom: 2px solid white;
+}
+
+#notetesto
+{
+    font-size: 12pt;
+    margin: 20px;
+    border-radius: 3px;
+    width: 50%;
+    height: 30%;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

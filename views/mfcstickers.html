@@ -1,0 +1,168 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            font-size: 16;
+            background: rgba(33,33,33,1);
+            font-weight: bold;
+            text-align: center;
+        }
+        h2{
+            color: white;
+            font-size: 25pt;
+        }
+        #header{
+            border: none;
+            border-bottom: 2px solid white;
+            color: white;
+        }
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        table{
+            font-size: 15pt;
+            color: white;
+            width: 80%;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+        }
+        td{
+            text-align: center;
+            border-bottom: 2px solid white;;
+        }
+        a{
+            background-color: rgba(4, 142, 255, 0.918);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            padding: 3px;
+        }
+        .nve
+        {
+            margin-left: 20px;
+        }
+        #navbar
+        {
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+        }
+        #cnc
+        {
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: rgb(252, 162, 46);
+            padding: 5px;
+            font-weight: bold;
+            border: 0;
+            cursor: pointer;
+        }   
+        .deleteb
+        {
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: red;
+            padding: 5px;
+            font-weight: bold;
+            border: 0;
+            cursor: pointer;
+        }
+        .tbutton
+        {
+            font-size: 11pt;
+        }
+    </style>
+    <title>Stickers minifig customizer</title>
+</head>
+<body>
+    <h2>Stickers Minifig</h2>
+    <div id="navbar">
+        <a href="/admin" class="nve">ORDINI</a><a href="/adminmf" class="nve">ORDINI MINIFIG</a><a href="/mfcstickers" class="nve">AMMINISTRAZIONE MINIFIG CUSTOMIZER</a>
+    </div> 
+    <br>
+    <div>
+        <input type="text" name="nc" id="newcategory"><button id="cnc" onclick="crete_new_category()">Crea nuova categoria</button>
+    </div> 
+    <br>
+        <table>
+            <tr>
+            <th>Categoria</th>
+            </tr>
+            {% for category in categories %}
+            <tr>
+               <td> {{ category }} </td>
+               <td><a href="/viewstickerscategory?ctg={{  category  }}" class="tbutton">Sfoglia</a></td>
+               <td><button class="deleteb" onclick="delete_category('{{  category  }}')">Elimina</button></td>
+            </tr>
+            {% endfor %}
+          </table>
+</body>
+<script>
+    function formatParams( params ){
+    return "?" + Object
+            .keys(params)
+            .map(function(key){
+            return key+"="+encodeURIComponent(params[key])
+            })
+            .join("&")
+    }
+
+    function crete_new_category()
+    {
+        let nc = document.getElementById("newcategory").value;
+        if (nc != "")
+        {
+            var Req = new XMLHttpRequest();
+            var params = {
+            cname: nc
+            }
+            Req.onreadystatechange = function () {
+                if(Req.readyState === 4 && Req.status === 200) {
+                    if (Req.responseText == "ok")
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert("Qualcosa è andato storto...");
+                    }
+                }
+            };
+            Req.open("GET", "/addstickercategory" + formatParams(params));
+            Req.send();
+        }
+    }
+    function delete_category(catename)
+    {
+        var r = confirm("Sei sicuro di voler eliminare la categoria '" + catename + "'?");
+        if (r == true)
+        {
+            var Req = new XMLHttpRequest();
+            var params = {
+            cname: catename 
+            }
+            Req.onreadystatechange = function () {
+                if(Req.readyState === 4 && Req.status === 200) {
+                    if (Req.responseText == "ok")
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert("Qualcosa è andato storto...");
+                    }
+                }
+            };
+            Req.open("GET", "/deletestickercategory" + formatParams(params));
+            Req.send();
+        }
+    }
+</script>
+</html>

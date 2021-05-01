@@ -1,0 +1,14 @@
+{
+   "username": "",
+   "password": "",
+   "email": [
+      "",
+      ""
+   ],
+   "emailapp": "",
+   "emailpassapp": "",
+   "stmpserver": "",
+   "smtpport": "",
+   "secretkey": "",
+   "port": 5000
+}

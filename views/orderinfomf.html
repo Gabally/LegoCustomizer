@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            font-size: 16;
+            background: rgba(33,33,33,1);
+            font-weight: bold;
+            text-align: center;
+        }
+        h2{
+            color: white;
+            font-size: 25pt;
+        }
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #DescriptionBox{
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 20px;
+            border-style: solid;
+            border-color: brown;
+            border-width: 4px;
+            background-color: white;
+            text-align: left;
+            font-size: 18pt;
+        }
+        img
+        {
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+        a
+        {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <title>Dettagli Ordine</title>
+</head>
+<body>
+    <h2>Dettagli Ordine #{{  order[0]  }}</h2>
+    <div id="DescriptionBox">
+        <br>
+        Data di Creazione: {{  order[1]  }}
+        <br><div>
+        Email: {{  order[2]  }}
+        </div><br>
+        Nome: {{  order[3]  }}
+        <br><div>
+        Telefono: {{  order[4]  }}
+        </div><br>
+        Note Ordine:<div style="word-wrap: break-word;">
+        {{  order[5]  }}
+        </div>
+        <br><br>
+        <div style="display: flex;">
+            <a href="{{  order[6]  }}" download="Front.png"><img src="{{  order[6]  }}" alt="Front Minifig"></a>
+            <a href="{{  order[7]  }}" download="Back.png"><img src="{{  order[7]  }}" alt="Back Minifig"></a>
+        </div>
+    </div>
+</body>
+</html>

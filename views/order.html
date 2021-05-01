@@ -1,0 +1,39 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/orderform.css">
+    <title>Ordine Prodotto</title>
+</head>
+<body>
+    <div id="app">
+        <div id="form">
+            <form id="infoform">
+                <h1>Ordine</h1>
+                <div class="campo">
+                    <label for="email">Email di contatto:</label><br>
+                    <input type="email" v-model="email" class="txtField" required id="email" name="email" autofocus placeholder="email@domain.com">
+                </div>
+                <br>
+                <br>
+                <div class="campo">
+                    <label for="data">Data entro cui l'ordine deve essere completato:</label><br>
+                    <input type="date" v-model="date" ref="datepicker" @change="verifyDate" class="txtField" required name="scadenza" id="data">
+                    <div v-if="error" style="text-align: center;">
+                        <p id="date-error">{{ error }}</p>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="data">Note sull'ordine</label><br>
+                    <textarea name="note" v-model="note" spellcheck="false" maxlength="1000" id="notetesto" cols="30" required rows="10" ></textarea>
+                </div>
+                <div class="campo">
+                    <input type="image" id="submitBtn" src="/public/imgs/check-bold.svg" alt="">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="/public/js/order.js"></script>
+</html>

@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            font-size: 16;
+            background: rgba(33,33,33,1);
+            font-weight: bold;
+            text-align: center;
+        }
+        h2{
+            color: white;
+            font-size: 25pt;
+        }
+        #header{
+            border: none;
+            border-bottom: 2px solid white;
+            color: white;
+        }
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        table{
+            font-size: 15pt;
+            color: white;
+            width: 80%;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+        }
+        td{
+            text-align: center;
+            border-bottom: 2px solid white;;
+        }
+        a{
+            background-color: rgba(4, 142, 255, 0.918);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            padding: 3px;
+            font-weight: bold;
+        }
+        .nve
+        {
+            margin-left: 20px;
+        }
+        #navbar
+        {
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+        }
+        .tbutton
+        {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+        .deleteb
+        {
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            background-color: red;
+            padding: 2px;
+            border: 0;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12pt;
+            padding: 3px;
+            outline: none;
+        }
+        .deleteb:hover
+        {
+            background-color: rgba(253, 63, 63, 0.836);
+        }
+    </style>
+    <title>Administration</title>
+</head>
+<body>
+    <h2>Lista Ordini Minifig</h2>
+    <div id="navbar">
+        <a href="/admin" class="nve">ORDINI</a><a href="/adminmf" class="nve">ORDINI MINIFIG</a><a href="/mfcstickers" class="nve">AMMINISTRAZIONE MINIFIG CUSTOMIZER</a>
+    </div>  
+    <br>
+        <table>
+            <tr>
+            <th>Creazione</th>
+            <th>Email</th>
+            <th>Nome</th>
+            </tr>
+            {% for id, created, email, cname, phone, notes, image in orders %}
+            <tr>
+               <td> {{ created }} </td>
+               <td> {{ email }} </td>
+               <td> {{ cname }} </td>
+               <td><a href="/adminmf?orderid={{  id  }}" class="tbutton">Dettagli</a></td>
+               <td><button class="deleteb" onclick="deleteordermf('{{  id  }}','{{  cname  }}')">Elimina</button></td>
+            </tr>
+            {% endfor %}
+          </table>
+</body>
+<script>
+    function formatParams( params ){
+    return "?" + Object
+            .keys(params)
+            .map(function(key){
+            return key+"="+encodeURIComponent(params[key])
+            })
+            .join("&")
+    }
+
+    function deleteordermf(idz, email)
+    {
+        let isok = confirm("Vuoi eliminare l'ordine da " + email + " ?");
+        if (isok)
+        {
+            let Req = new XMLHttpRequest();
+            let params = {
+            id: idz
+            }
+            Req.onreadystatechange = function () {
+                if(Req.readyState === 4 && Req.status === 200) {
+                    if (Req.responseText == "ok")
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert("Qualcosa è andato storto...");
+                    }
+                }
+            };
+            Req.open("GET", "/deleteminifigorder" + formatParams(params));
+            Req.send();
+        }
+    }
+</script>
+</html>
