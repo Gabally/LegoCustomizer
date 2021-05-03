@@ -1,13 +1,23 @@
 var sqlite3 = require('sqlite3').verbose();
 const config = require('../config');
+const bcrypt = require('bcrypt');
 
 module.exports  = (username, password, cb) => {
     let db = new sqlite3.Database(config.DBNAME);
     db.run('CREATE TABLE IF NOT EXISTS users (username TEXT NOT NULL, password TEXT NOT NULL)', ()=>{
-        db.get('SELECT * FROM users WHERE username=? AND password=?', [username, password], (err, row) => {
+        db.get('SELECT * FROM users', (err, row) => {
             if(row)
             {
-                cb(err, true);
+                bcrypt.compare(password, row.password, (err, res) => {
+                    if (err)
+                    {
+                        cb(err, false);
+                    }
+                    else
+                    {
+                        cb(err, (res && row.username === username));
+                    }
+                });
             }
             else
             {

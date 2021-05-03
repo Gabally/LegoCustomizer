@@ -3,7 +3,7 @@ const config = require('../config');
 
 module.exports  = (username, password, cb) => {
     let db = new sqlite3.Database(config.DBNAME);
-    db.run('UPDATE users SET username=? WHERE password=?', [username, password], (err) => {
+    db.run('UPDATE users SET username=?', username, (err) => {
         cb(err);
     });
 }

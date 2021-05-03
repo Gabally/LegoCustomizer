@@ -24,6 +24,7 @@ var app = new Vue({
                 }).then(response => {
                     if (response.status == 200)
                     {
+                        this.error1 = "";
                         this.username = "";
                         this.password = "";
                         this.showSnackbar("Username changed successfully");
@@ -55,6 +56,7 @@ var app = new Vue({
                 }).then(response => {
                     if (response.status == 200)
                     {
+                        this.error2 = "";
                         this.newPassword = "";
                         this.password = "";
                         this.showSnackbar("Password changed successfully");

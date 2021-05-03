@@ -4,6 +4,7 @@ const pageroutes = require('./pageroutes');
 const path = require('path');
 const session = require('express-session');
 const util = require('./utils');
+const config = require('./config');
 
 const app = express();
 
@@ -28,5 +29,10 @@ app.get('/orderform', (req, res) => {
 
 app.use('/api', routes);
 app.use(pageroutes);
+
+let db = new sqlite3.Database(config.DBNAME);
+db.run('CREATE TABLE IF NOT EXISTS users (username TEXT NOT NULL, password TEXT NOT NULL)');
+db.run('CREATE TABLE IF NOT EXISTS orders (id INTEGER PRIMARY KEY, inserted TEXT NOT NULL, email TEXT NOT NULL, date TEXT NOT NULL, note TEXT NOT NULL)');
+db.run('CREATE TABLE IF NOT EXISTS minifigorders (id INTEGER PRIMARY KEY, inserted TEXT NOT NULL, email TEXT NOT NULL, name TEXT NOT NULL, phone TEXT, notes TEXT NOT NULL, front TEXT NOT NULL, back TEXT NOT NULL)');
 
 app.listen(5000, () => console.log('App listening on port 5000!'));
