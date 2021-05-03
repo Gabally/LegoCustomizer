@@ -1,10 +1,10 @@
-const delMinifigOrder = require("../db/delMinifigOrder");
-const utils = require("../utils");
-const path = require("path");
+const delMinifigOrder = require('../db/delMinifigOrder');
+const utils = require('../utils');
+const path = require('path');
 
 const cleanFiles = (front, back) => {
-  utils.cleanUpFile(path.join(__dirname, "..", "public", "uploads", front));
-  utils.cleanUpFile(path.join(__dirname, "..", "public", "uploads", back));
+  utils.cleanUpFile(path.join(__dirname, '..', 'public', 'uploads', front));
+  utils.cleanUpFile(path.join(__dirname, '..', 'public', 'uploads', back));
 }
 
 module.exports = (req, res) => {

@@ -1,4 +1,4 @@
-const delOrder = require("../db/delOrder");
+const delOrder = require('../db/delOrder');
 
 module.exports = (req, res) => {
     const id = req.query.id;

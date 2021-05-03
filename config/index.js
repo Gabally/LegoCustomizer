@@ -1,3 +1,3 @@
 module.exports = {
-    DBNAME: "data.db"
+    DBNAME: 'data.db'
 }

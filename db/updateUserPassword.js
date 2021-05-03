@@ -1,9 +1,9 @@
 var sqlite3 = require('sqlite3').verbose();
 const config = require('../config');
 
-module.exports  = (id, cb) => {
+module.exports  = (oldPassword, password, cb) => {
     let db = new sqlite3.Database(config.DBNAME);
-    db.run('DELETE FROM orders WHERE id=?', id, (err) => {
+    db.run('UPDATE users SET password=? WHERE password=?', [password, oldPassword], (err) => {
         cb(err);
     });
 }

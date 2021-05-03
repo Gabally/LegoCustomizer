@@ -1,10 +1,10 @@
-const insertMinifigOrder = require("../db/insertMinifigOrder");
+const insertMinifigOrder = require('../db/insertMinifigOrder');
 const utils = require('../utils');
 const path = require('path');
 
 const cleanFiles = (front, back) => {
-  utils.cleanUpFile(path.join(__dirname, "..", "public", "uploads", front));
-  utils.cleanUpFile(path.join(__dirname, "..", "public", "uploads", back));
+  utils.cleanUpFile(path.join(__dirname, '..', 'public', 'uploads', front));
+  utils.cleanUpFile(path.join(__dirname, '..', 'public', 'uploads', back));
 }
 
 module.exports = (req, res) => {
@@ -17,19 +17,19 @@ module.exports = (req, res) => {
     const front = `${utils.generateUUID()}.png`;
     const back = `${utils.generateUUID()}.png`;
     try {
-        utils.writeB64Image(frontB64, path.join(__dirname, "..", "public", "uploads", front));
-        utils.writeB64Image(backB64, path.join(__dirname, "..", "public", "uploads", back));
+        utils.writeB64Image(frontB64, path.join(__dirname, '..', 'public', 'uploads', front));
+        utils.writeB64Image(backB64, path.join(__dirname, '..', 'public', 'uploads', back));
         insertMinifigOrder(email, name, phone, notes, front, back, (err) => {
           if (err)
           {
             cleanFiles(front, back);
             res.status(500)
-            .json({response: "Si è verificato un errore interno"});
+            .json({response: 'Si è verificato un errore interno'});
           }
           else
           {
             res.status(201)
-            .json({response: "Il tuo ordine è stato ricevuto"});
+            .json({response: 'Il tuo ordine è stato ricevuto'});
           }
       });
     } catch(e) {

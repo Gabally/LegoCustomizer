@@ -1,23 +1,17 @@
-/*
-$('#date-error').hide();
-$('#data').on('change', function() {
-    if (new Date(this.value) <=  new Date()){
-        $("input[type=date]").val("")
-        $('#date-error').show();
-        document.getElementById('date-error').innerHTML = "La data deve essere futura";
-    } else {
-        $('#date-error').hide();
-        document.getElementById('date-error').innerHTML = "";
-    }  
-});
-*/
 var app = new Vue({
     el: '#app',
     data: {
       error: null,
       email: null,
-      note: null,
-      date: null
+      notes: null,
+      date: null,
+      sStats: {
+        WAITING: "W",
+        LOADING: "L",
+        ERROR: "E",
+        SUCCESS: "S"
+      },
+      submitStatus: "W"
     },
     methods: {
         verifyDate()
@@ -32,6 +26,32 @@ var app = new Vue({
             {
                 this.error = "";
             }
+        },
+        submitOrder()
+        {
+            this.submitStatus = this.sStats.LOADING;
+            fetch("/api/placeorder", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: this.email,
+                date: this.date,
+                notes: this.notes,
+            })
+            }).then(response => {
+                if (response.status == 201)
+                {
+                    this.submitStatus = this.sStats.SUCCESS;
+                }
+                else
+                {
+                    this.submitStatus = this.sStats.ERROR;
+                }
+            }).catch(e => {
+                this.submitStatus = this.sStats.ERROR;
+            });
         }
     }
 });

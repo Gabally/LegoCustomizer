@@ -142,11 +142,11 @@ var app = new Vue({
     },
     mounted: function () {
       this.front.src = "/public/imgs/Front.png";
-      this.front.onload = () => {
-        this.repaint();
-      };
       this.back.src = "/public/imgs/Back.png";
       this.frontMask.src = "/public/imgs/FrontMask.png";
+      this.frontMask.onload = () => {
+        this.repaint();
+      };
       this.backMask.src = "/public/imgs/BackMask.png";
       this.canvas = this.$refs.canvas;
       this.canvas.width = 1199;
@@ -339,7 +339,7 @@ var app = new Vue({
       {
         let newImg = new Object();
         newImg.side =  this.side;
-        newImg.image = ImgObject;
+        newImg.image = ImgObject.cloneNode();
         newImg.ImgWidth = ImgObject.width * 4;
         newImg.ImgHeigth = ImgObject.height * 4;
         newImg.OGWidth  = ImgObject.width * 4;
@@ -449,6 +449,8 @@ var app = new Vue({
       {
         this.submitStatus = this.sStats.WAITING;
         let oldSide = this.side;
+        let oldActive = this.activeSticker;
+        this.activeSticker = null;
         this.side = "F";
         this.repaint();
         this.fFront = this.canvas.toDataURL("image/png");
@@ -456,6 +458,7 @@ var app = new Vue({
         this.repaint();
         this.fBack = this.canvas.toDataURL("image/png");
         this.side = oldSide;
+        this.activeSticker = oldActive;
         this.repaint();
         this.showForm = true; 
       },
@@ -484,6 +487,8 @@ var app = new Vue({
           {
             this.submitStatus = this.sStats.ERROR;
           }
+        }).catch(e => {
+          this.submitStatus = this.sStats.ERROR;
         });
       }
     }

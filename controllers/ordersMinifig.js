@@ -1,8 +1,8 @@
-const fetchMinifigOrders = require("../db/fetchMinifigOrders");
+const fetchMinifigOrders = require('../db/fetchMinifigOrders');
 
 module.exports = (req, res) => {
     try {
-        fetchMinifigOrders((orders, err) => {
+        fetchMinifigOrders((err, orders) => {
           if (err)
           {
             res.sendStatus(500);

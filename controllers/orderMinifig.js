@@ -1,9 +1,9 @@
-const fetchMinifigOrder = require("../db/fetchMinifigOrder");
+const fetchMinifigOrder = require('../db/fetchMinifigOrder');
 
 module.exports = (req, res) => {
     const id = req.query.id;
     try {
-        fetchMinifigOrder(id, (order, err) => {
+        fetchMinifigOrder(id, (err, order) => {
           if (err)
           {
             res.sendStatus(500);

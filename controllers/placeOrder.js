@@ -1,4 +1,4 @@
-const insertOrder = require("../db/insertOrder");
+const insertOrder = require('../db/insertOrder');
 
 module.exports = (req, res) => {
     const email = req.body.email;
@@ -9,12 +9,12 @@ module.exports = (req, res) => {
           if (err)
           {
             res.status(500)
-            .json({response: "Si è verificato un errore interno"});
+            .json({response: 'Si è verificato un errore interno'});
           }
           else
           {
             res.status(201)
-            .json({response: "Il tuo ordine è stato ricevuto"});
+            .json({response: 'Il tuo ordine è stato ricevuto'});
           }
       });
     } catch(e) {

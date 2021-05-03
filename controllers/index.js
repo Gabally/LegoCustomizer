@@ -6,5 +6,10 @@ module.exports = {
     ordersMinifig: require('./ordersMinifig'),
     orderMinifig: require('./orderMinifig'),
     deleteOrderMinifig: require('./deleteOrderMinifig'),
-    deleteOrder: require('./deleteOrder')
+    deleteOrder: require('./deleteOrder'),
+    authenticate: require('./authenticate'),
+    loginViewController: require('./loginViewController'),
+    setCredentials: require('./setCredentials'),
+    updatePassword: require('./updatePassword'),
+    updateUsername: require('./updateUsername')
 }

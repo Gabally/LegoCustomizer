@@ -1,0 +1,22 @@
+.center
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#loginform
+{
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 3px 4px 3px 2px rgba(158, 158, 158, 0.377);
+}
+
+.error
+{
+    color: red;
+    font-weight: bold;
+    font-size: 12pt;
+}

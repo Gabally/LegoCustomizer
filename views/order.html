@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +9,7 @@
 <body>
     <div id="app">
         <div id="form">
-            <form id="infoform">
+            <form id="infoform" v-on:submit.prevent="submitOrder">
                 <h1>Ordine</h1>
                 <div class="campo">
                     <label for="email">Email di contatto:</label><br>
@@ -25,10 +26,22 @@
                 </div>
                 <div class="campo">
                     <label for="data">Note sull'ordine</label><br>
-                    <textarea name="note" v-model="note" spellcheck="false" maxlength="1000" id="notetesto" cols="30" required rows="10" ></textarea>
+                    <textarea name="note" v-model="notes" spellcheck="false" maxlength="1000" id="notetesto" cols="30" required rows="10" ></textarea>
                 </div>
                 <div class="campo">
-                    <input type="image" id="submitBtn" src="/public/imgs/check-bold.svg" alt="">
+                    <input v-if="submitStatus == sStats.WAITING || submitStatus == sStats.ERROR" type="image" id="submitBtn" src="/public/imgs/check-bold.svg" alt="">
+                    <div class="falign">
+                        <div class="loader" v-if="submitStatus == sStats.LOADING">
+                        </div>
+                    </div>
+                    <div class="success" v-if="submitStatus == sStats.SUCCESS">
+                        Il tuo ordine è stato inoltrato correttamente &#x2705;.
+                        <br>
+                        Puoi chiudere il form.
+                    </div>
+                    <div class="error" v-if="submitStatus == sStats.ERROR">
+                        Si è verificato un errore sconosciuto.
+                    </div>
                 </div>
             </form>
         </div>

@@ -1,8 +1,8 @@
-const fetchOrders = require("../db/fetchOrders");
+const fetchOrders = require('../db/fetchOrders');
 
 module.exports = (req, res) => {
     try {
-        fetchOrders((orders, err) => {
+        fetchOrders((err, orders) => {
           if (err)
           {
             res.sendStatus(500);

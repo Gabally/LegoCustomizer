@@ -1,9 +1,9 @@
-const fetchOrder = require("../db/fetchOrder");
+const fetchOrder = require('../db/fetchOrder');
 
 module.exports = (req, res) => {
     const id = req.query.id;
     try {
-        fetchOrder(id, (order, err) => {
+        fetchOrder(id, (err, order) => {
           if (err)
           {
             res.sendStatus(500);
