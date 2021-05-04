@@ -27,10 +27,10 @@ var app = new Vue({
                         }
                         else
                         {
-                            this.error = "An unknown error occoured.";
+                            this.error = "Si è verificato un errore sconosciuto";
                         }
                     }).catch(e => {
-                        this.error = "An unknown error occoured.";
+                        this.error = "Si è verificato un errore sconosciuto";
                     });
             }
         }

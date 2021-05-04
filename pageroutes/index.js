@@ -13,8 +13,8 @@ router.get('/admin', middleware.isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'admin.html'));
 });
 
-router.get('/passwordoptions', middleware.isLoggedIn, (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'changepassword.html'));
+router.get('/options', middleware.isLoggedIn, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'options.html'));
 });
 
 module.exports = router;

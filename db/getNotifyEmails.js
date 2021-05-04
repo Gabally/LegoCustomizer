@@ -3,7 +3,7 @@ const config = require('../config');
 
 module.exports  = ( cb) => {
     let db = new sqlite3.Database(config.DBNAME);
-    db.all('SELECT * FROM orders', (err, row) => {
-        cb(err, row);
+    db.all('SELECT * FROM notifyemails', (err, rows) => {
+        cb(err, rows);
     });
 }

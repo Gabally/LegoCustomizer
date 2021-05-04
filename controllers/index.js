@@ -11,5 +11,7 @@ module.exports = {
     loginViewController: require('./loginViewController'),
     setCredentials: require('./setCredentials'),
     updatePassword: require('./updatePassword'),
-    updateUsername: require('./updateUsername')
+    updateUsername: require('./updateUsername'),
+    notifyEmails: require('./notifyEmails'),
+    setNotifyEmails: require('./setNotifyEmails')
 }

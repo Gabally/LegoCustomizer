@@ -24,14 +24,14 @@ var app = new Vue({
                     }
                     else if (response.status == 401)
                     {
-                        this.error = "The username or password is invalid.";
+                        this.error = "Lo username o la password sono invalidi,";
                     }
                     else
                     {
-                        this.error = "An unknown error occoured.";
+                        this.error = "Si è verificato un errore sconosciuto.";
                     }
                 }).catch(e => {
-                    this.error = "An unknown error occoured.";
+                    this.error = "Si è verificato un errore sconosciuto.";
                 });
         }
     }
