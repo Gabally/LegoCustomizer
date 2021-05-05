@@ -1,6 +1,5 @@
 # CustomTorsoAndOrdersCB
 cb backend and web app for orders and minifigs
 
-### Column Name
+### Things to do
 - [ ] server side data validation
-- [ ] sendgrid

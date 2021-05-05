@@ -1,4 +1,6 @@
 const insertOrder = require('../db/insertOrder');
+const newOrderEmail = require('../emails/newOrderEmail');
+const getNotifyEmails = require('../db/getNotifyEmails');
 
 module.exports = (req, res) => {
     const email = req.body.email;
@@ -15,6 +17,18 @@ module.exports = (req, res) => {
           {
             res.status(201)
             .json({response: 'Il tuo ordine è stato ricevuto'});
+            let d = new Date();
+            let now = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+            getNotifyEmails((err, emails) => {
+              if(err)
+              {
+                console.error(err);
+              }
+              else
+              {
+                newOrderEmail(now, email, date, notes, emails);
+              }
+            });
           }
       });
     } catch(e) {

@@ -1,6 +1,8 @@
 const insertMinifigOrder = require('../db/insertMinifigOrder');
 const utils = require('../utils');
 const path = require('path');
+const getNotifyEmails = require('../db/getNotifyEmails');
+const newTorsoEmail = require('../emails/newTorsoEmail');
 
 const cleanFiles = (front, back) => {
   utils.cleanUpFile(path.join(__dirname, '..', 'public', 'uploads', front));
@@ -30,6 +32,18 @@ module.exports = (req, res) => {
           {
             res.status(201)
             .json({response: 'Il tuo ordine è stato ricevuto'});
+            getNotifyEmails((err, emails) => {
+              if(err)
+              {
+                console.error(err);
+              }
+              else
+              {
+                let d = new Date();
+                let now = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+                newTorsoEmail(now, email, name, phone, notes, frontB64.replace(/^data:image\/png;base64,/, ""), backB64.replace(/^data:image\/png;base64,/, ""), emails);
+              }
+            });
           }
       });
     } catch(e) {
