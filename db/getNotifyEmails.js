@@ -1,8 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
-const config = require('../config');
 
 module.exports  = ( cb) => {
-    let db = new sqlite3.Database(config.DBNAME);
+    let db = new sqlite3.Database(process.env.DB_NAME);
     db.all('SELECT * FROM notifyemails', (err, rows) => {
         cb(err, rows);
     });

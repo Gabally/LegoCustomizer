@@ -1,9 +1,8 @@
-var sqlite3 = require('sqlite3').verbose();
-const config = require('../config');
+const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 
 module.exports  = (password, cb) => {
-    let db = new sqlite3.Database(config.DBNAME);
+    let db = new sqlite3.Database(process.env.DB_NAME);
     db.get('SELECT * FROM users', (err, row) => {
         if(row)
         {

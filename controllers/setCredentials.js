@@ -1,7 +1,12 @@
 const userExists = require('../db/userExists');
 const setUserCredentials = require('../db/setUserCredentials');
+const { body, validationResult } = require('express-validator');
 
 module.exports = (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.sendStatus(400);
+    }
     const username = req.body.username;
     const password = req.body.password;
     try {

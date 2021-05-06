@@ -3,6 +3,8 @@ const utils = require('../utils');
 const path = require('path');
 const getNotifyEmails = require('../db/getNotifyEmails');
 const newTorsoEmail = require('../emails/newTorsoEmail');
+const { body, validationResult } = require('express-validator');
+const fs = require('fs');
 
 const cleanFiles = (front, back) => {
   utils.cleanUpFile(path.join(__dirname, '..', 'public', 'uploads', front));
@@ -10,6 +12,10 @@ const cleanFiles = (front, back) => {
 }
 
 module.exports = (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400);
+    }
     const email = req.body.email;
     const name = req.body.name;
     const phone = req.body.phone;
@@ -19,8 +25,12 @@ module.exports = (req, res) => {
     const front = `${utils.generateUUID()}.png`;
     const back = `${utils.generateUUID()}.png`;
     try {
-        utils.writeB64Image(frontB64, path.join(__dirname, '..', 'public', 'uploads', front));
-        utils.writeB64Image(backB64, path.join(__dirname, '..', 'public', 'uploads', back));
+        let uploadsPath = path.join(__dirname, '..', 'public', 'uploads');
+        if (!fs.existsSync(uploadsPath)){
+            fs.mkdirSync(uploadsPath);
+        }
+        utils.writeB64Image(frontB64, path.join(uploadsPath, front));
+        utils.writeB64Image(backB64, path.join(uploadsPath, back));
         insertMinifigOrder(email, name, phone, notes, front, back, (err) => {
           if (err)
           {

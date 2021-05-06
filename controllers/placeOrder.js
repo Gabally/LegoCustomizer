@@ -1,8 +1,13 @@
 const insertOrder = require('../db/insertOrder');
 const newOrderEmail = require('../emails/newOrderEmail');
 const getNotifyEmails = require('../db/getNotifyEmails');
+const { body, validationResult } = require('express-validator');
 
 module.exports = (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.sendStatus(400);
+    }
     const email = req.body.email;
     const date = req.body.date;
     const notes = req.body.notes;

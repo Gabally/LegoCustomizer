@@ -34,7 +34,7 @@
             <div class="cockform">
                 <form v-on:submit.prevent="changeUsername">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input required class="mdl-textfield__input" v-model="username" type="text" id="username">
+                        <input maxlength="40" required class="mdl-textfield__input" v-model="username" type="text" id="username">
                         <label class="mdl-textfield__label" for="username">New Username...</label>
                     </div>
                     <br>
@@ -61,7 +61,7 @@
             <div class="cockform">
                 <form v-on:submit.prevent="changePassword">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input required class="mdl-textfield__input" v-model="newpassword" type="text" id="newpass">
+                        <input required class="mdl-textfield__input" v-model="newpassword" minlength="8" maxlength="60" type="password" id="newpass">
                         <label class="mdl-textfield__label" for="username">New Password...</label>
                     </div>
                     <br>

@@ -87,19 +87,19 @@
                     <h1>Ordine</h1>
                     <div class="campo">
                         <label for="email">Email di contatto</label><br>
-                        <input type="email" class="textfield" required id="email" v-model="email" name="email" autofocus placeholder="email@domain.com">
+                        <input type="email" class="textfield" maxlength="320" required id="email" v-model="email" name="email" autofocus placeholder="email@domain.com">
                     </div>
                     <div class="campo">
                         <label for="data">Nome</label><br>
-                        <input type="text" class="textfield" v-model="name" required name="cname" spellcheck="false" placeholder="name" id="cname">
+                        <input type="text" class="textfield" maxlength="40" v-model="name" required name="cname" spellcheck="false" placeholder="name" id="cname">
                     </div>
                     <div class="campo">
                         <label for="data">Telefono</label><br>
-                        <input type="tel" class="textfield" required name="phone" v-model="phone" placeholder="phone" id="phone">
+                        <input type="tel" class="textfield" required name="phone" maxlength="20" v-model="phone" placeholder="phone" id="phone">
                     </div>
                     <div class="campo">
                         <label for="data">Note sull'ordine</label><br>
-                        <textarea placeholder="notes" spellcheck="false" name="note" v-model="notes" id="notetesto" cols="30" required rows="10" ></textarea>
+                        <textarea placeholder="notes" spellcheck="false" name="note" v-model="notes" maxlength="1000" id="notetesto" cols="30" required rows="10" ></textarea>
                     </div>
                     <br>
                     <h3>Anteprima Torso:</h3><br>

@@ -1,3 +1,5 @@
+const { body, validationResult } = require('express-validator');
+
 module.exports = {
     isLoggedIn(req, res, next)
     {

@@ -62,8 +62,8 @@ var app = new Vue({
                     if (response.status == 200)
                     {
                         this.error2 = "";
-                        this.newPassword = "";
-                        this.password = "";
+                        this.newpassword = "";
+                        this.password2 = "";
                         this.showSnackbar("Password changed successfully");
                     }
                     else if (response.status == 401)

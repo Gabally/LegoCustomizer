@@ -1,8 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
-const config = require('../config');
 
 module.exports = (email, date, note, cb) => {
-    let db = new sqlite3.Database(config.DBNAME);
+    let db = new sqlite3.Database(process.env.DB_NAME);
     db.run("INSERT INTO orders VALUES (NULL, date('now'), ?, ?, ?)", [email, date, note], (err) => {
         db.close();
         if (err)
