@@ -1,0 +1,2 @@
+docker build -t lego-customizer-api .
+docker run --name lego-api --env-file ./.env -v $(pwd)/datadir:/datadir  -d -p 5000:5000 lego-customizer-api

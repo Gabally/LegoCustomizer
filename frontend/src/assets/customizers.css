@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+* {
+  outline: none;
+}
+
+#Editor {
+  background: white;
+  grid-area: editor;
+  text-align: center;
+}
+
+#btnRotate {
+  border-radius: 30px;
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+}
+
+#btnRotate:hover {
+  background-color: hsla(133, 93%, 57%, 0.525);
+}
+
+#toolbar {
+  grid-area: footer;
+  background-color: white;
+  display: flex;
+}
+
+#btnRotate:active {
+  transform: rotate(360deg);
+  transition: 0s;
+  background-color: hsla(133, 76%, 43%, 0.603);
+}
+
+#uploadimage {
+  display: none;
+}
+
+#sidemenu {
+  display: grid;
+  grid-area: stickers;
+  background-color: white;
+  text-align: center;
+  grid-template-areas:
+    "top"
+    "stickerszone";
+  grid-template-rows: 20% auto;
+}
+
+#sidemenuheader {
+  grid-area: top;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 12pt;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.selector {
+  height: 30px;
+  border: 0px;
+  background: transparent;
+  border-bottom: 2px solid rgb(70, 69, 69);
+  cursor: pointer;
+}
+
+#cnvtxt {
+  margin: 10px;
+  width: 90%;
+  height: auto;
+  border-radius: 3px;
+  border: 2px dotted grey;
+  background-color: white;
+}
+
+#inputText {
+  height: 4%;
+  font-size: 2vh;
+  border-radius: 10px;
+  border-style: solid;
+}
+
+.addbutton {
+  background-color: rgb(73, 73, 240);
+  color: white;
+  border-radius: 10px;
+  border-style: none;
+  width: 15%;
+  height: 5%;
+  font-size: 3vh;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.addbutton:active {
+  background-color: rgb(59, 59, 216);
+  transform: translateY(2px);
+}
+
+#stickerlist {
+  margin-top: 20px;
+  height: 75%;
+  width: 90%;
+  border-radius: 10px;
+  overflow-y: scroll;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  border-color: #8f8f8f;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#stickerlist::-webkit-scrollbar {
+  display: none;
+}
+
+.defaultsticker {
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  margin: 3px;
+  width: 40%;
+  height: auto;
+}
+
+#fonts {
+  width: 50%;
+  height: 30px;
+}
+
+#layermenu {
+  grid-area: placed;
+  background-color: white;
+  text-align: center;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#layermenu::-webkit-scrollbar {
+  display: none;
+}
+
+.layer {
+  background-color: white;
+  margin-top: 8px;
+  line-height: 30px;
+  border-radius: 6px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  padding: 3px;
+  border: 2px dotted rgb(119, 119, 119);
+}
+
+.delete {
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  border-radius: 3px;
+}
+
+.delete:hover {
+  background-color: rgba(221, 90, 90, 0.849);
+}
+
+.delete:active {
+  transform: translateY(2px);
+}
+
+#dimensions {
+  -webkit-appearance: none;
+  height: 5px;
+  background-color: black;
+  border: 1px solid darken(green, 4%);
+  transition: all 0.3s ease;
+  border-radius: 20px;
+}
+
+#dimensions:hover {
+  background-color: lighten(grey, 20%);
+}
+
+#dimensions::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 20px;
+  background: #414141;
+  cursor: pointer;
+}
+
+#dimensions::-moz-range-thumb {
+  width: 5px;
+  height: 20px;
+  background: #414141;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+}
+
+#addimg {
+  border-style: solid;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 6vh;
+  line-height: 100px;
+  border-width: 2px;
+}
+
+#addimg:active {
+  background-color: #8f8f8f;
+}
+
+#date-error {
+  color: red;
+  padding: 5px;
+  background: #f7836e;
+  border-radius: 10px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+
+#obscurator {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 0;
+  background-color: #575757d2;
+  z-index: 300;
+}
+
+#changeColorText {
+  height: 30px;
+  border: 0;
+  vertical-align: middle;
+  width: 50%;
+}
+
+#minifgobj {
+  display: none;
+}
+
+#logo {
+  grid-area: topbar;
+  text-align: center;
+}
+
+#logoimg {
+  margin-top: 5px;
+  height: 60px;
+  width: auto;
+}
+
+#closeform {
+  position: fixed;
+  top: 5%;
+  z-index: 99999;
+  left: 28%;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 18pt;
+  padding: 2px;
+  display: none;
+}
+
+
+#closeform:hover {
+  background-color: red;
+}
+
+#fontSize {
+  width: 50%;
+}
+
+#c-app {
+  display: grid;
+  grid-template-areas:
+    "topbar topbar topbar"
+    "placed editor stickers"
+    "slider rotate order";
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 10% 80% 15%;
+  height: 90vh;
+}
+
+.tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#d-slider {
+  grid-area: slider;
+}
+
+#r-button {
+  grid-area: rotate;
+}
+
+#o-button {
+  grid-area: order;
+}
+
+#culo {
+  overflow-y: scroll;
+  grid-area: stickerszone;
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#culo::-webkit-scrollbar {
+  display: none;
+}
+
+#mainCanvas {
+  height: 100%;
+  width: auto;
+  border: 2px dashed gray;
+}
+
+#openform {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#openform:hover {
+  background-color: hsla(133, 93%, 57%, 0.525);
+}
+
+#openform:active {
+  background-color: hsla(133, 76%, 43%, 0.603);
+  transform: translateY(2px);
+}
+
+.falign {
+  display: flex;
+  justify-content: center;
+}
+
+.brick-color {
+  font-size: 15px;
+}
+
+.sticker-icon {
+  height: 50px;
+}
+
+.stickerselected {
+  background: rgba(206, 203, 203, 0.781);
+}

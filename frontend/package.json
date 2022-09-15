@@ -1,0 +1,22 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.0.96",
+    "axios": "^0.27.2",
+    "font-awesome": "^4.7.0",
+    "moment": "^2.29.4",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.3",
+    "wave-ui": "^2.42.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.1",
+    "vite": "^3.0.4"
+  }
+}

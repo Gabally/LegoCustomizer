@@ -1,0 +1,19 @@
+{
+    "SUBMIT_ORDER": "/submit-order",
+    "READ_ORDERS": "/orders",
+    "DELETE_ORDER": "/order",
+    "SUBMIT_TORSO": "/submit-torso",
+    "READ_TORSOS": "/torsos",
+    "DELETE_TORSO": "/torso",
+    "SUBMIT_BRICK": "/submit-brick",
+    "READ_BRICKS": "/bricks",
+    "DELETE_BRICK": "/brick",
+    "READ_NOTIFICATION_EMAILS": "/notification-emails",
+    "ADD_NOTIFICATION_EMAILS": "/notification-emails",
+    "DELETE_NOTIFICATION_EMAIL": "/notification-emails",
+    "SET_CREDENTIALS": "/set-credentials",
+    "LOGIN": "/login",
+    "UPDATE_PASSWORD": "/update-password",
+    "CAN_LOGIN": "/can-login",
+    "LOGOUT": "/logout"
+}
