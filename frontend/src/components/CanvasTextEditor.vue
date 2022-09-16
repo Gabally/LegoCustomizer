@@ -110,7 +110,8 @@ export default {
                 let txtImage = new Image();
                 txtImage.src = this.$refs.cnvtxt.toDataURL();
                 txtImage.onload = () => {
-                    this.addNewSticker(txtImage);
+                    this.$emit("txt", txtImage);
+                    //this.addNewSticker(txtImage);
                 }
             }
         }

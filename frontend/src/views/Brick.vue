@@ -30,40 +30,7 @@
                 </select>
             </div>
             <div id="culo">
-                <div class="opt" id="Testo" v-if="selectedCategory == 'Testo'">
-                    <h3>Preview</h3>
-                    <canvas ref="cnvtxt" id="cnvtxt">
-                        Your browser doesn't include support for the canvas element.
-                    </canvas>
-                    <br>
-                    <button class="addbutton" @click="addText">+</button><br><br>
-                    Testo
-                    <br>
-                    <input type="text" ref="inputText" @keyup="updateTextRender" id="inputText"><br><br>
-                    Font
-                    <br>
-                    <select name="fonts" @change="setTextFont" class="selector">
-                        <option value="Arial">Arial</option>
-                        <option value="Tahoma">Tahoma</option>
-                        <option value="Calibri">Calibri</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Impact">Impact</option>
-                    </select>
-                    <br><br><br>
-                    <div style="display: flex;">
-                        <div style="width: 50%;">
-                            <span>Dimensione</span>
-                            <br>
-                            <input type="number" value="30" name="fs" @input="setFontSize" min="1"
-                                ref="fontSizeSelector" id="fontSize">
-                        </div>
-                        <div style="width: 50%;">
-                            <span>Colore</span>
-                            <br>
-                            <input type="color" @change="setFontColor" id="changeColorText">
-                        </div>
-                    </div>
-                </div>
+                <canvas-text-editor @txt="addNewSticker" v-if="selectedCategory == 'Testo'"></canvas-text-editor>
                 <div class="opt" v-else>
                     <img v-for="sticker in stickers.find(e => e.category == selectedCategory).stickers"
                         :src="'imgs/stickers/' + selectedCategory + '/' + sticker" @click="stickerFromImg"
@@ -107,6 +74,7 @@
 <script>
 import stickers from "@/assets/stickers.json";
 import { loadImage } from "@/utils";
+import CanvasTextEditor from "@/components/CanvasTextEditor.vue";
 
 import "@/assets/customizers.css";
 
@@ -116,7 +84,8 @@ export default {
     name: "brick",
     inject: ["api"],
     components: {
-        orderForm
+        orderForm,
+        CanvasTextEditor
     },
     data() {
         return {
