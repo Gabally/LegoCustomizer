@@ -31,17 +31,12 @@
         </select>
       </div>
       <div id="culo">
-        <canvas-text-editor @txt="addNewSticker" class="opt" id="Testo" v-if="selectedCategory == 'Testo'"></canvas-text-editor>
+        <canvas-text-editor @txt="addNewSticker" class="opt" id="Testo" v-if="selectedCategory == 'Testo'">
+        </canvas-text-editor>
         <div class="opt" v-else>
           <img v-for="sticker in stickers.find(e => e.category == selectedCategory).stickers"
             :src="'imgs/stickers/' + selectedCategory + '/' + sticker" @click="stickerFromImg" class="defaultsticker"
             alt="">
-          <label for="uploadimage" id="imulabel">
-            <div id="addimg">
-              <input type="file" name="img" @change="imgUploadChange" size="65" id="uploadimage" />
-              +
-            </div>
-          </label>
         </div>
       </div>
     </div>
@@ -49,16 +44,45 @@
       v-if="showForm"></order-form>
     <div id="obscurator" v-if="showForm">
     </div>
-    <div class="tool" id="d-slider">
-      <input type="range" @input="resizeSticker" ref="dimensionsSlider" id="dimensions" value="100" name="dslider"
-        min="5" max="100">
-    </div>
-    <div class="tool" id="r-button">
-      <img src="@/assets/imgs/buttons/rotate.svg" alt="" @click="switchView" width="80" height="60" id="btnRotate">
-    </div>
-    <div class="tool" id="o-button">
-      <input type="image" id="openform" @click="showFormAndRender" @mouseover="changeCart" @mouseleave="changeCart"
-        src="imgs/cart-outline.svg" alt="">
+    <div class="tool h100" id="lower-bar">
+      <div ref="bar" class="h100">
+        <div class="action-btns h100">
+          <div class="f-align-row h100">
+            <div class="btn-container">
+              <input type="range" @input="resizeSticker" ref="dimensionsSlider" id="dimensions" value="100"
+                name="dslider" min="5" max="100">
+              <div>
+                Dimensione Disegno
+              </div>
+            </div>
+            <div class="btn-container" style="width: 150px">
+              <label for="uploadimage" id="imulabel">
+                <div id="addimg">
+                  <input type="file" name="img" @change="imgUploadChange" size="65" id="uploadimage" />
+                  <img src="@/assets/imgs/buttons/add_photo.svg" alt="">
+                </div>
+              </label>
+              <div>
+                Inserisci immagine
+              </div>
+            </div>
+            <div class="btn-container">
+              <img src="@/assets/imgs/buttons/rotate.svg" alt="" @click="switchView" width="80" height="60"
+                id="btnRotate">
+              <div>
+                Ruota
+              </div>
+            </div>
+          </div>
+          <div class="btn-container" style="width: 100px">
+            <input type="image" id="openform" @click="showFormAndRender" @mouseover="changeCart"
+              @mouseleave="changeCart" src="imgs/cart-outline.svg" alt="">
+            <div>
+              Invia Ordine
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -113,8 +137,14 @@ export default {
     this.ctx = this.canvas.getContext("2d");
     this.repaint();
     this.ready = true;
+    window.addEventListener("resize", this.resizeActionBar);
+    this.resizeActionBar();
   },
   methods: {
+    resizeActionBar() {
+      const { width } = this.canvas.getBoundingClientRect();
+      this.$refs.bar.style.width = width + "px";
+    },
     getMousePos(evt) {
       if (!this.ready) { return }
       let ClientRect = this.canvas.getBoundingClientRect(),

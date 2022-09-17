@@ -12,18 +12,19 @@
         <div id="layermenu">
             <h3>Stickers</h3>
             <div id="placedStickers">
-                <div v-for="(el, index) in appliedStickers" :class="{ stickerselected: activeSticker == index }" @click="selectActiveSticker(index)" class="layer">
+                <div v-for="(el, index) in appliedStickers" :class="{ stickerselected: activeSticker == index }"
+                    @click="selectActiveSticker(index)" class="layer">
                     Sticker {{ index + 1 }}
                     <img class="sticker-icon" :src="el.image.src" alt="">
                     <button @click="deleteSticker(index)" class="delete"><img src="@/assets/imgs/buttons/delete.svg"
-                    alt=""></button>
+                            alt=""></button>
                 </div>
             </div>
         </div>
         <div id="sidemenu">
             <div id="sidemenuheader">
                 <h3>Opzioni Personalizzazione</h3>
-                <select  name="cars" class="selector" v-model="selectedCategory">
+                <select name="cars" class="selector" v-model="selectedCategory">
                     <option value="Testo">Testo</option>
                     <option v-for="category in stickers" :value="category.category">{{ category.category }}
                     </option>
@@ -35,38 +36,61 @@
                     <img v-for="sticker in stickers.find(e => e.category == selectedCategory).stickers"
                         :src="'imgs/stickers/' + selectedCategory + '/' + sticker" @click="stickerFromImg"
                         class="defaultsticker" alt="">
-                    <label for="uploadimage" id="imulabel">
-                        <div id="addimg">
-                            <input type="file" name="img" @change="imgUploadChange" size="65" id="uploadimage" />
-                            +
-                        </div>
-                    </label>
                 </div>
             </div>
         </div>
         <div id="obscurator" v-if="showForm">
-        <order-form @close="showForm = false" :imagePreviews="previews" :formData="formData" :submitURL="api.SUBMIT_BRICK" v-if="showForm"></order-form>
+            <order-form @close="showForm = false" :imagePreviews="previews" :formData="formData"
+                :submitURL="api.SUBMIT_BRICK" v-if="showForm"></order-form>
         </div>
-        <div class="tool" id="d-slider">
-            <input type="range" @input="resizeSticker" ref="dimensionsSlider" id="dimensions" value="100" name="dslider"
-                min="5" max="100">
-        </div>
-        <div class="tool" id="r-button">
-            <h3 style="margin: 5px;">Colore:</h3>
-            <select class="selector brick-color" @change="changePiece" name="" id="">
-                <option value="white.png">Bianco</option>
-                <option value="blue.png">Blu</option>
-                <option value="tan.png">Tan scuro</option>
-                <option value="lavander.png">Lavanda</option>
-                <option value="black.png">Nero</option>
-                <option value="red.png">Rosso</option>
-                <option value="tan.png">Tan</option>
-                <option value="yellow.png">Giallo</option>
-            </select>
-        </div>
-        <div class="tool" id="o-button">
-            <input type="image" id="openform" @click="showFormAndRender" @mouseover="changeCart"
-                @mouseleave="changeCart" src="imgs/cart-outline.svg" alt="">
+        <div class="tool h100" id="lower-bar">
+            <div ref="bar" class="h100">
+                <div class="action-btns h100">
+                    <div class="f-align-row h100">
+                        <div class="btn-container">
+                            <input type="range" @input="resizeSticker" ref="dimensionsSlider" id="dimensions"
+                                value="100" name="dslider" min="5" max="100">
+                            <div>
+                                Dimensione Disegno
+                            </div>
+                        </div>
+                        <div class="btn-container" style="width: 150px">
+                            <label for="uploadimage" id="imulabel">
+                                <div id="addimg">
+                                    <input type="file" name="img" @change="imgUploadChange" size="65"
+                                        id="uploadimage" />
+                                    <img src="@/assets/imgs/buttons/add_photo.svg" alt="">
+                                </div>
+                            </label>
+                            <div>
+                                Inserisci immagine
+                            </div>
+                        </div>
+                        <div class="btn-container">
+                            <select class="selector brick-color" @change="changePiece" name="" id="">
+                                <option value="white.png">Bianco</option>
+                                <option value="blue.png">Blu</option>
+                                <option value="tan.png">Tan scuro</option>
+                                <option value="lavander.png">Lavanda</option>
+                                <option value="black.png">Nero</option>
+                                <option value="red.png">Rosso</option>
+                                <option value="tan.png">Tan</option>
+                                <option value="yellow.png">Giallo</option>
+                            </select>
+                            <div>
+                                Colore
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-container" style="width: 100px">
+                        <input type="image" id="openform" @click="showFormAndRender" @mouseover="changeCart"
+                            @mouseleave="changeCart" src="imgs/cart-outline.svg" alt="">
+                        <div>
+                            Invia Ordine
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -116,8 +140,14 @@ export default {
         this.ctx = this.canvas.getContext("2d");
         this.repaint();
         this.ready = true;
+        window.addEventListener("resize", this.resizeActionBar);
+        this.resizeActionBar();
     },
     methods: {
+        resizeActionBar() {
+            const { width } = this.canvas.getBoundingClientRect();
+            this.$refs.bar.style.width = width + "px";
+        },
         getMousePos(evt) {
             if (!this.ready) { return; }
             let ClientRect = this.canvas.getBoundingClientRect(),
