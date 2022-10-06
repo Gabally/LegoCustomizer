@@ -124,6 +124,7 @@ export default {
             isDragging: false,
             front: null,
             frontMask: null,
+            studMask: null,
             isCart: false,
             previews: [],
             formData: {},
@@ -134,6 +135,7 @@ export default {
     async mounted() {
         this.front = await loadImage("imgs/brick/bricks/white.png");
         this.frontMask = await loadImage("imgs/brick/mask.png");
+        await this.loadStudMask();
         this.canvas = this.$refs.canvas;
         this.canvas.width = 1199;
         this.canvas.height = 1199;
@@ -165,8 +167,20 @@ export default {
         },
         changePiece(evt) {
             let img = evt.target.value;
-            this.front.onload = () => { this.repaint(); }
-            this.front.src = `imgs/brick/bricks/${img}`;
+            this.front.onload = async () => {
+                await this.loadStudMask();
+                this.repaint();
+            }
+            const src = `imgs/brick/bricks/${img}`;
+            this.front.src = src;
+        },
+        async loadStudMask() {
+            let tmp = document.createElement("canvas");
+            let ctx = tmp.getContext("2d");
+            tmp.width = this.front.width;
+            tmp.height = 75;
+            ctx.drawImage(this.front, 0, 0);
+            this.studMask = await loadImage(tmp.toDataURL("image/png"));
         },
         resizeSticker(e) {
             if (this.activeSticker != null) {
@@ -256,6 +270,12 @@ export default {
             if (this.activeSticker != null) {
                 this.drawStickerOutline(this.appliedStickers[this.activeSticker]);
             }
+            this.paintStudMask();
+        },
+        paintStudMask() {
+            let width = this.canvas.width;
+            let height = this.canvas.width / (this.studMask.width / this.studMask.height);
+            this.ctx.drawImage(this.studMask, this.canvas.width / 2 - width / 2, this.canvas.height / 2 - height / 2 - 106, width, height);
         },
         paintFinalMask() {
             let tempCanvas = document.createElement("canvas");
